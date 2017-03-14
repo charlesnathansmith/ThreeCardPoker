@@ -12,6 +12,8 @@ See Charts.pdf and the below output for the results of a typical analysis.
 
 ```python
 >>> execfile("tcbanking.py")
+```
+```
 Three Card Poker - Player Banking Simulator
 
 

@@ -223,7 +223,6 @@ class ThreeCardPoker(object):
         
         #Pair Plus bonus loses (-1) when a player's hand is less than a pair
         #Otherwise it pays a multiple of the bet depending on the hand strength for pairs and better
-
         #The bet plays independently of the hand winning or losing,
         #but if the player does not make a play bet, the Pair Plus bonus is forfeit (-1)
 
@@ -243,6 +242,15 @@ class ThreeCardPoker(object):
                                                       np.where(player_values > self.tc_lookup.MAX_STRAIGHT_FLUSH, 30,
                                                           np.where(player_values > 1, 40, 50)))))))
         
+        #Calculate Ante wins/losses
+        #If a play bet is not made, ante loses (-1) automatically
+        #If a play bet is made:
+        #    Hand wins:  ante wins (+1)
+        #    Hand loses: ante loses (-1) if dealer has Q high or better, otherwise pushes (0)
+
+        ante_multipliers[:] =  np.where(play_multipliers == 0, -1,
+                                   np.where(win_lose > -1, win_lose,
+                                       np.where(dealer_values <= QUEEN_HIGH, -1, 0)))
         
         #Calculate Play wins/losses
         #We need to do this after calculating the Pair Plus bonus
@@ -250,15 +258,6 @@ class ThreeCardPoker(object):
         #If the dealer hand is worse than Q high, the Play bet pushes (0)
         
         play_multipliers[:] = np.where(dealer_values <= QUEEN_HIGH, play_multipliers*win_lose, 0)
-
-        
-        #Calculate Ante wins/losses
-        #Rules:
-        #    Hand wins:  ante wins (+1)
-        #    Hand loses: ante loses (-1) if dealer has Q high or better, otherwise pushes (0)
-
-        ante_multipliers[:] =  np.where(win_lose > -1, win_lose,
-                                   np.where(dealer_values <= QUEEN_HIGH, -1, 0))
 
         del win_lose
 

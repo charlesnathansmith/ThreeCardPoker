@@ -21,7 +21,7 @@ NUM_PLAYERS = 5
 #Each round consists of one deal of hands to NUM_PLAYERS and the player/dealer
 #Each player hand is evaluated against the player/dealer's hand,
 #With the player/dealer collecting any losses and losing bonus bets and paying any bonuses won,
-NUM_ROUNDS = 100000
+NUM_ROUNDS = 5000000
 
 #Per betting spot per player [play, ante, pair-plus, 6-card]
 #Play must be the same as ante, and pair-plus cannot be more than ante
@@ -34,9 +34,7 @@ print "Three Card Poker - Player Banking Simulator\n\n"
 
 print "Drawing cards for %d rounds of play," % NUM_ROUNDS
 print "Each with %d regular players and one player/dealer..." % NUM_PLAYERS,
-
 hands = tcpoker.GenerateHands(NUM_ROUNDS,NUM_PLAYERS)
-
 
 print "DONE"
 print "Evaluating hand values (for %d total hands)..." % ((NUM_PLAYERS+1) * NUM_ROUNDS),
@@ -50,6 +48,8 @@ adj_payouts = tcpoker.AdjustForAction(multipliers, BANK_AMOUNT)
 
 print "DONE\n\n"
 
+del hands
+
 
 #We are interested in returns from the player/dealer's perspective,
 #Who wins when the other plays lose and vice versa
@@ -58,6 +58,9 @@ adj_payouts[:] *= -1
 
 print "Total player/dealer profit/loss:  $%d ($%d per round)" % (adj_payouts.sum(), adj_payouts.sum(axis=2).sum(axis=1).mean())
 print "Profit/loss unadjusted for max payouts: $%d ($%d per round)\n\n" % (-multipliers.sum(), -multipliers.sum(axis=2).sum(axis=1).mean())
+
+del multipliers
+
 print "Total Profit/Loss per betting spot\n"
 
 for spot_name, spot_values in zip(["Play", "Ante", "P-Plus", "6-card"], adj_payouts.sum(axis=1).T):

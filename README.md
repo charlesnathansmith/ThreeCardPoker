@@ -17,31 +17,31 @@ See Charts.pdf and the below output for the results of a typical analysis.
 Three Card Poker - Player Banking Simulator
 
 
-Drawing cards for 100000 rounds of play,
+Drawing cards for 5000000 rounds of play,
 Each with 5 regular players and one player/dealer... DONE
-Evaluating hand values (for 600000 total hands)... DONE
+Evaluating hand values (for 30000000 total hands)... DONE
 Determining wins, losses, and bonus payouts... DONE
 
 
-Total player/dealer profit/loss:  $1477120 ($14 per round)
-Profit/loss unadjusted for max payouts: $1429380 ($14 per round)
+Total player/dealer profit/loss:  $141535020 ($28 per round)
+Profit/loss unadjusted for max payouts: $138260400 ($27 per round)
 
 
 Total Profit/Loss per betting spot
 
-Play:		-322640
-Ante:		-478240
-P-Plus:		647940
-6-card:		1630060
+Play:		-16194500
+Ante:		42960820
+P-Plus:		35172100
+6-card:		79596600
 
 
 Player hands by type
 
 Royal Flush:		0	(0.0%)
-Straight Flush:		1143	(0.2%)
-Trips:			1266	(0.3%)
-Straight:		16057	(3.2%)
-Flush:			24837	(5.0%)
-Pair:			84408	(16.9%)
-High card:		372289	(74.5%)
+Straight Flush:		54504	(0.2%)
+Trips:			59064	(0.2%)
+Straight:		814417	(3.3%)
+Flush:			1238843	(5.0%)
+Pair:			4236608	(16.9%)
+High card:		18596564	(74.4%)
 ```
